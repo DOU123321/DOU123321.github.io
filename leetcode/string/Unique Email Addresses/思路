@@ -1,0 +1,28 @@
+
+
+
+
+知识点：
+1.c++中find函数：
+  string.find(const basic_string &str, size_type index),示例如下：
+    
+  1）position = s.find("jk");   //find 函数返回jk 在s中的首个下标位置
+    if (position != s.npos)  //如果没找到，返回一个特别的标志c++中用npos表示
+    position=s.find("b",5);//从字符串s 下标5开始，查找字符串b ,返回b 在s 中的下标  
+  2）flag = "c";  //find 函数返回flag 中任意字符在s中第一次出现的下标位置  
+     position = s.find_first_of(flag);  
+ 
+2.c++中erase函数：
+  1）string& erase ( size_t pos = 0, size_t n = npos );删除从pos开始的n个字符
+  2）iterator erase ( iterator position );删除position处的一个字符(position是个string类型的迭代器)
+  3）iterator erase ( iterator first, iterator last );删除从first到last之间的字符（first和last都是迭代器）
+
+
+3.c++中remove函数：
+  ForwardIterator remove(ForwardIterator first, ForwardIterator last, const T& value);
+  remove 也需要一对迭代器来指定所要进行操作的元素区间。它并不接受容器作为参数
+  简而言之，remove 移动了区间中的元素。其结果是，“需要被删除”的元素被移到了区间的尾部。它返回一个迭代器，指向第一个“需要被删除”的元素。
+唯一可以从容器中删除元素的方法是调用容器的成员函数 erase 。remove 算法并不知道它操作的元素的所在容器，所以不可能从容器中删除元素。
+C++ vector中实际删除元素使用的是容器vecrot中std::vector::erase()方法。
+C++ 中std::remove()并不删除元素，因为容器的size()没有变化，只是元素的替换。
+  
