@@ -1,0 +1,39 @@
+class Solution {
+public:
+    
+    static bool cmp(string a,string b)
+    {
+        return a.compare(b)>0;
+    }
+    
+     string P(string S)
+    {
+        int size=S.size();
+        if(size==2) return S;
+        vector<string> strSort;
+        int l=1,tmp=0;
+        for(int i=1;i<size-1;i++)
+        {
+            if(S[i]=='1') tmp++;
+            else tmp--;
+            if(tmp==0)
+            {
+                strSort.push_back(P(S.substr(l,i-l+1)));
+                l=i+1;
+            }
+        }
+        sort(strSort.begin(),strSort.end(),cmp);
+        string temp="";
+        for(int j=0;j<strSort.size();j++)
+            temp.append(strSort[j]);
+        return "1"+temp+"0";
+    }
+    string makeLargestSpecial(string S) {
+        
+        S="1"+S+"0";
+        string result=  P(S);
+        return result.substr(1,result.size()-2);
+        
+    }
+    
+};
