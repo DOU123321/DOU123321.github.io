@@ -41,7 +41,7 @@ public:
         int count=0;
         unordered_set<string> storage;
         for(auto email:emails){
-            string temp="";
+            string temp("");
             bool before=true;
             for(int i=0;i<email.length();i++){
                 if(before){
