@@ -1,0 +1,26 @@
+此题我的做法是直接用用find函数找到位置。
+
+经典做法是运用KMP算法。
+
+暴力做法：
+直接采用两层循环的暴力法来做，逐个比较每个字符haystack[i]和needle[0]，如果对应字符有任何一个不相等，就跳过，继续比较haystack[i+1]，
+如果对应字符相等就继续比较haystack[i+1]和needle[1]，一直比较到needle的最后节点，如果needle[j]中的j等于needle的长度，说明找到了一个
+答案，直接返回i。如果外层遍历完还没有找到答案就返回-1。
+
+
+
+知识点：
+1.C语言(函数)学习之strstr（）
+   char *strstr(const char *haystack, const char *needle);
+   目标：搜索"子串"在"指定字符串"中第一次出现的位置
+   参数说明：
+   haystack        -->被查找的目标字符串"父串"
+   needle          -->要查找的字符串对象"子串"
+   返回值：
+   注：若needle为NULL, 则返回0（find函数一样返回0）
+   (1) 成功找到，返回在"父串"中第一次出现的位置的 char *指针
+   (2) 若未找到，也即不存在这样的子串，返回: "NULL"
+   注：strstr函数中参数严格"区分大小写"
+
+2.KMP算法：
+  参考http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
