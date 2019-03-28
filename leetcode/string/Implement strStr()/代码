@@ -1,0 +1,94 @@
+//代码
+class Solution {
+public:
+    int strStr(string haystack, string needle) { 
+        if(needle=="")
+            return 0;
+        int pos=haystack.find(needle);
+        if(pos<haystack.length())
+            return pos;
+        return -1;
+    }
+};
+
+//经典KMP算法：
+
+class Solution {
+public:
+
+void makenext(char *ptr,int *next,int len)
+{
+    next[0]=0;
+    int k=0;
+    for(int i=1;i<len;i++)
+    {
+        while(ptr[k]!=ptr[i]&&k>0)
+        {
+            k=next[k-1];
+        }
+        if(ptr[k]==ptr[i])
+            k++;
+        next[i]=k;
+        
+    }   
+    
+}
+    
+int kmp(char *str,int lenstr,char *ptr,int lenptr)
+{
+    int k=0;
+    int *next=new int[lenptr];
+    makenext(ptr,next,lenptr);
+    for(int i=0;i<lenstr;i++)
+    {
+        while(k>0&&str[i]!=ptr[k])
+        {
+         k=next[k-1];   
+        }
+        if(str[i]==ptr[k])
+            k++;
+        if(k==lenptr)
+        {
+            delete[] next;
+            return i-lenptr+1;      
+        }
+    }
+    delete [] next;
+    return -1;
+    
+}  
+    
+int strStr(string haystack, string needle) {
+	if(needle.empty())
+        return 0;
+    int lenstr=haystack.size();
+    int lenptr=needle.size();
+    return kmp((char *)haystack.c_str(),lenstr,(char*)needle.c_str(),lenptr);
+    
+}
+};
+
+
+//暴力做法
+class Solution {
+public:
+    
+int strStr(string haystack, string needle) {
+	if(needle.empty())
+        return 0;
+    int n=haystack.size();
+    int m=needle.size();
+   for(int i=0;i<=n-m;i++)
+   {
+       int j=0;
+       for(;j<m;j++)
+       { 
+           if(haystack[i+j]!=needle[j])
+               break;
+       }
+       if(j==m)
+       return i;
+   }
+    return -1;
+}
+};
