@@ -1,0 +1,31 @@
+//字符串内首尾字符依次交换
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+    int str_len = s.size();
+    int i = 0;
+    int j = str_len - 1;
+
+    while (i < j)
+    {
+        swap(s[i++], s[j--]);
+    }
+        
+    }
+
+
+
+
+//左右交换
+class Solution {
+public:
+    void reverseString(vector<char>& s) {
+         int left = 0, right = s.size() - 1;
+        while (left < right) {
+            char t = s[left];
+            s[left++] = s[right];
+            s[right--] = t;
+        }
+        
+    }
+};
