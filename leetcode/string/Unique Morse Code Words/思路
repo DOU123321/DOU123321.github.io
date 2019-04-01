@@ -1,0 +1,55 @@
+知识点：
+C++ STL中最基本以及最常用的类或容器无非就是以下几个：
+string
+vector
+set
+list
+map
+这里先主要介绍vector set
+参考：https://blog.csdn.net/liang841451955/article/details/80404509
+1.vector
+用于存储数据，vector在原本使用数组的地方均可以替代, 并且其可以动态增长,不需要考虑大小
+C++ STL中的verctor好比是C语言中的数组，但是vector又具有数组没有的一些高级功能。
+初始化：
+  vector<T> v1 v1是一个空vector,它潜在的元素是T类型的，执行默认初始化。
+  vector<T> v2（v1） v2中包含有v1所有元素的副本
+  vector<T> v2=v1  等价于v2（v1）
+  vector<T> v3(n,val) v3包含了n个重复的元素，值为val
+  vector<T> v4(a,b,c,...) v4包含了初始值个数的元素，每个元素都被赋予相应的初始值
+ 如果vector的元素类型是int，默认初始化为0；如果vector元素类型为string，则默认初始化为空字符串。
+ （1）添加元素
+ 请使用push_back加入元素，并且这个元素是被加在数组尾部的。
+（2）vector支持的其他操作：
+v.empty()  判断是否为空，空返回真
+v.size()   返回v中元素的个数
+v.push_back(t)  向v的尾端添加一个值为t的元素
+v[n]  返回v中第n个位置上元素的引用
+v1=v2 用v2中元素的拷贝替换v1中的元素
+v1==v2 v1和v2相等当且仅当他们的元素数量相同且对应位置的元素值都相同
+v.front() 访问第一个元素
+v.back() 访问最后一个元素
+能对已存在的元素进行赋值或者修改操作，如果是要加入新元素，务必使用push_back。push_back的作用有两个：
+告诉编译器为新元素开辟空间、将新元素存入新空间里。
+我们也可以选择使用迭代器来访问元素vector<string>::iterator（v.begin,v.end） 反向迭代器vector<string>::reverse_iterator（v.rbegin ，v.rend）
+
+(3)vector最常用的增删操作
+pop_back() 删除尾部的对象
+erase（）删除一个或多个元素
+clear（） 删除所有元素
+insert（）插入一个或多个对象
+    single element (1)	
+    iterator insert (iterator position, const value_type& val);
+    fill (2)	
+    void insert (iterator position, size_type n, const value_type& val);
+    range (3)	
+    void insert (iterator position, InputIterator first, InputIterator last);
+注意：虽然vertor对象可以动态增长，但是也或有一点副作用：已知的一个限制就是不能再范围for循环中向vector对象添加元素。
+另外一个限制就是任何一种可能改变vector对象容量的操作，不如push_back，都会使该迭代器失效。
+
+总而言之就是：但凡使用了迭代器的循环体，都不要向迭代器所属的容器添加元素！
+C++中push_back和insert两个有什么区别?
+顾名思义push_back把元素插入容器末尾，insert把元素插入任何你指定的位置。
+不过push_back速度一般比insert快。如果能用push_back尽量先用push_back。
+2.set
+set跟vector差不多，它跟vector的唯一区别就是，set里面的元素是有序的且唯一的，只要你往set里添加元素，它就会自动排序，
+而且，如果你添加的元素set里面本来就存在，那么这次添加操作就不执行。
