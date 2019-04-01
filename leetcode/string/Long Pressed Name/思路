@@ -1,0 +1,10 @@
+思路：
+
+1.若typed 符合要求，则typed 的 length(长度)满足条件：typed.length() >= name.length();
+2.index, i分别是指向name 和 typed的下标，index, i下标初始值都为0；
+3.当 name[index] == typed[i] 时，index, i 向后移动一个单位；
+4.当 name[index] != typed[i] 时，判断 typed[i] 是否等于name[index-1] (name[index-1] == typed[i-1])；
+5.若 typed[i] != name[index-1] 则 typed 不满足，返回false。
+6.若 typed[i] == name[index-1]，则 ++i，直至 typed[i] != name[index-1]，执行步骤2。
+
+注意：根据上面的分析，需要用一个字符变量来存储name[index]的值，该字符变量初始化为空字符。
