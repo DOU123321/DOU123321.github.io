@@ -1,0 +1,110 @@
+
+//DFS
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        
+       int size=M.size();
+       vector<bool> visited(size,false);
+       int res=0;
+        for(int i=0;i<size;i++)
+        {
+            if(visited[i]) continue;
+            DFS(M,i,visited);
+            res++;
+        }
+        
+        return res;
+        
+    }
+    
+    void DFS(vector<vector<int>>& M,int k,vector<bool>& visited)
+    {
+        visited[k]=true;
+        for(int i=0;i<M.size();i++)
+        {
+            if(!M[k][i]||visited[i]) continue;
+            DFS(M,i,visited);
+        }
+    }
+    
+    
+};
+
+//BFS
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        
+       int size=M.size(),res=0;
+       vector<bool> visited(size,false);
+       queue<int> que;
+        
+        for(int i=0;i<size;i++)
+        {
+            if(visited[i]) continue;
+            que.push(i);
+            while(!que.empty())
+            {
+                int fir=que.front();
+                visited[fir]=true;
+                que.pop();
+                for(int j=0;j<size;j++)
+                {
+                    if(M[fir][j]&&!visited[j])
+                    {
+                        que.push(j);
+                    }
+                }
+            }
+            res++;
+        }
+        return res;    
+    }
+    
+};
+
+//Union Find
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        
+       int size=M.size();
+       int res=size;
+       vector<int> root(size);
+        for(int i=0;i<size;i++) root[i]=i;
+       
+        for(int i=0;i<size;i++)
+        {
+            
+            for(int j=i+1;j<size;j++)
+            {
+                if(M[i][j]==1)
+                { 
+                    int p=getroot(root,i);
+                    int q=getroot(root,j);
+                    if(p!=q)
+                    {
+                        res--;
+                        root[q]=p;
+                    }
+                        
+                }
+            }
+            
+        }
+        return res;    
+    }
+    
+    int getroot(vector<int> &root,int k)
+    {
+        while(root[k]!=k)
+        {
+            root[k]=root[root[k]];
+            k=root[k];
+        }
+        return k;
+            
+    }
+    
+};
