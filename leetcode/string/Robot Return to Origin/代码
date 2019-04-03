@@ -1,0 +1,29 @@
+//
+class Solution {
+public:
+    bool judgeCircle(string moves) {
+        
+        int count[2]={0};
+        for( int i=0;i<moves.length();i++)
+        {
+            switch(moves[i]){
+                case 'U':
+                    count[0]++;
+                    break;
+                case 'D': 
+                    count[0]--;
+                    break;
+                case 'L':
+                    count[1]++;
+                    break;
+                case 'R':
+                    count[1]--;
+                    break;
+            }
+            
+        }
+        if(!count[0]&&!count[1])
+            return true;
+        return false;
+    }
+};
