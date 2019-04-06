@@ -1,0 +1,26 @@
+//做法
+class Solution {
+public:
+    string reverseWords(string s) {
+        //首先利用空格把每个单词找到
+        //利用reverse函数将单词翻转
+        int begin=0;
+       for(int i=0;i<s.length();i++)
+       {
+           if(s[i]==' ')
+           {
+               reverse(s.begin()+begin,s.begin()+i);
+               begin=i+1;
+           }
+         
+       }
+       reverse(s.begin()+begin,s.end());
+        //将最后一个单词进行反转
+       return s;
+    }
+};
+
+
+//reverse 函数：
+//reverse函数用于反转在[first,last)范围内的顺序（包括first指向的元素，不包括last指向的元素），reverse函数没有返回值
+//void reverse (BidirectionalIterator first,BidirectionalIterator last);
