@@ -1,0 +1,28 @@
+//
+class Solution {
+public:
+    int numSpecialEquivGroups(vector<string>& A) {
+        //首先遍历每个元素，将奇偶分开放在两个字符串中
+        //分别进行排序然后连接插入set中
+        //返回set的大小
+        set<string> B;
+        for(int i=0;i<A.size();i++)
+        {
+            string fir;
+            string sec;
+            for(int j=0;j<A[i].length();j++)
+            {
+                if(j%2==0)
+                    fir+=A[i][j];
+                else
+                    sec+=A[i][j];
+            }
+            sort(fir.begin(),fir.end());
+            sort(sec.begin(),sec.end());
+            B.insert(fir+sec);
+        }
+        
+        return B.size();
+     
+    }
+};
