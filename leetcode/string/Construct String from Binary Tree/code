@@ -1,0 +1,41 @@
+
+//第一种
+class Solution {
+public:
+    string tree2str(TreeNode* t) {
+        //一开始调用递归函数求出左右子结点的返回字符串
+        if(!t) return "";
+        string res("");
+        res+=to_string(t->val);
+        //对左右节点存在性进行判断
+        if(t->left) res=res+"("+tree2str(t->left)+")";
+            else if(t->right) res=res+"()";
+        if(t->right) res=res+"("+tree2str(t->right)+")";
+        return res;
+    }
+};
+
+//第二种
+class Solution {
+public:
+    string tree2str(TreeNode* t) {
+         if (!t) return "";
+        string res("");
+        help(t,res);    
+        return string(res.begin()+1,res.end()-1);
+    }
+    
+    
+    void help(TreeNode* t,string& res)
+    {
+        if(!t) return;
+        res+="("+to_string(t->val);
+        if (!t->left && t->right) res += "()";
+        help(t->left, res);
+        help(t->right, res);
+        res += ")";
+    }
+    
+    
+    
+};
