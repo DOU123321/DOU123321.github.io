@@ -1,0 +1,12 @@
+遇到二叉树的问题，要考虑一下情况：
+
+1. root == NULL: 有时候可以作为递归的出口
+
+2. root->left == NULL && root->right == NULL：叶子节点
+
+3. root->left != NULL && root->right == NULL：没有右子树的节点
+
+4. root->left == NULL && root->right != NULL：没有左子树的节点
+
+5. root->left != NULL && root->right != NULL ：普通的非叶子节点
+
