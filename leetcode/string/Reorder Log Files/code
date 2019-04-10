@@ -1,0 +1,33 @@
+//第一种
+bool cmp(const pair<string,string>& a,const pair<string,string>& b)
+{//按照pair中的第二个元素进行从小到大排序
+    return a.second<b.second;
+}
+
+class Solution {
+public:
+    vector<string> reorderLogFiles(vector<string>& logs) {
+        vector<pair<string,string>> letter;//存放letter-log以及去掉标签后的子串
+        vector<string> digit;//存放digits-log
+        
+        for(int i=0;i<logs.size();i++)
+        {
+             int pos=logs[i].find(" ");//找到分界点
+            if(islower(logs[i][pos+1]))//进行分类
+                letter.push_back(make_pair(logs[i],string(logs[i].begin()+pos+1,logs[i].end())));
+             else  
+                digit.push_back(logs[i]);
+                        
+        }
+        
+        sort(letter.begin(),letter.end(),cmp);//排序
+        vector<string> res;
+        
+        for(int i=0;i<letter.size();i++)
+            res.push_back(letter[i].first);
+        for(int i=0;i<digit.size();i++)
+            res.push_back(digit[i]);
+        return res;
+        
+    }
+};
