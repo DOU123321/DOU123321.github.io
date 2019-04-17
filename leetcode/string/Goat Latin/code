@@ -1,0 +1,50 @@
+//第一种
+class Solution {
+public:
+    string toGoatLatin(string S) {
+       
+        istringstream istr(S);
+        string out("");
+        string res("");
+        int cnt=1;
+        while(istr>>out)
+        {
+            if(tolower(out[0])== 'a' || tolower(out[0]) == 'e' || tolower(out[0]) == 'i' || tolower(out[0]) == 'o' || tolower(out[0]) == 'u')
+                out=out+"ma";
+            else
+                out=out.substr(1)+out[0]+"ma";
+            for(int i=0;i<cnt;i++)
+                out+='a';
+            res+=out+" ";
+            cnt++;
+        }
+        
+        return res.substr(0,res.length()-1);
+    }
+};
+
+//第二种
+class Solution {
+
+public:
+    string toGoatLatin(string S) {
+        unordered_set <char> w={'a','o','e','i','u','A','O','E','I','U'};//判断这个词是否含有元音字母，用到了unordered_set存储元音字母
+        istringstream istr(S);//将字符串分词，用到了istringstream 将字符串分词
+        string out("");
+        string res("");
+        int cnt=1;
+        while(istr>>out)
+        {
+            if(w.count(out[0])==1)
+                out=out+"ma";
+            else
+                out=out.substr(1)+out[0]+"ma";
+            for(int i=0;i<cnt;i++)
+                out+='a';
+            res+=" "+out;
+            cnt++;
+        }
+        
+        return res.substr(1);
+    }
+};
