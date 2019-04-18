@@ -1,0 +1,43 @@
+//代码一
+class Solution {
+public:
+    string reverseOnlyLetters(string S) {
+        
+        int end=S.length()-1;//定义了两个指针，指向开始和末尾
+        int fir=0;
+        string out("");
+        for(fir,end;end>=0;)
+        {
+            if((S[end]>=65&&S[end]<=90)||(S[end]>=97&&S[end]<=122))//判断末尾是否为字母
+            {
+                if((S[fir]>=65&&S[fir]<=90)||(S[fir]>=97&&S[fir]<=122))  //判断首部是否为字母
+                {
+                    out+=S[end];
+                    end--;
+                    fir++;
+                }
+                else
+                {out+=S[fir];
+                    fir++;}
+             }
+        else
+            end--;
+        }
+        if(fir!=S.length())
+            out+=S.substr(fir);
+        return out;
+    }
+};
+//代码二：利用swap函数从两边同时处理
+class Solution {
+public:
+    string reverseOnlyLetters(string S) {
+        
+       for (int i = 0, j = S.length() - 1; i < j; ++i, --j) {
+            while (i < j && !isalpha(S[i])) ++i;
+            while (i < j && !isalpha(S[j])) --j;
+            swap(S[i], S[j]);
+        }
+        return S;
+    }
+};
