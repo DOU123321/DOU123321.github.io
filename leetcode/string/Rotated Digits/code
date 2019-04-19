@@ -1,0 +1,91 @@
+//第一种 转化成字符串处理
+class Solution {
+public:
+    int rotatedDigits(int N) {
+        int cnt=0;
+     for(int i=1;i<=N;i++)
+     {
+         if(goodornot(i))
+             cnt++;
+     }
+        return cnt;
+    }
+    
+    
+    bool goodornot(int N)
+    {
+        string s=to_string(N);
+        int len =s.size();
+        bool flag=0;
+        for(int i=0;i<len;i++)
+        {
+            if(s[i]=='3'||s[i]=='4'||s[i]=='7')
+            {
+                flag=0;
+                break;
+            }
+                
+            if(s[i]=='2'||s[i]=='5'||s[i]=='6'||s[i]=='9')
+            {flag=1;}
+               
+        }
+        
+        return flag;
+    }
+};
+//第二种 直接用除法和模
+class Solution {
+public:
+    int rotatedDigits(int N) {
+        int cnt=0;
+     for(int i=1;i<=N;i++)
+     {
+         if(isgood(i))
+         {
+             cnt++;
+         }
+     }
+        return cnt;
+    }
+bool isgood(int i)
+{
+         bool flag=false;
+         int tmp=0;
+        while(i>0) 
+        {
+            tmp=i%10;
+            i=i/10;
+            if(tmp==3||tmp==4||tmp==7)    
+               return false;
+            if(tmp==2||tmp==5||tmp==6||tmp==9)
+                flag=true;
+        }
+      return flag;
+}
+};
+//利用动态规划的思想
+//定义了一个长度为N+1的一维布尔型DP数组，其中dp[i]表示数字i的三种状态，0表示数字i翻转后不合法，
+//1表示数字i翻转后和原数相同，2表示数字i翻转后形成一个不同的数字
+class Solution {
+public:
+    int rotatedDigits(int N) {
+         int res = 0;
+        vector<int> dp(N + 1);   
+        for (int i = 0; i <= N; ++i) {
+            if (i < 10) {
+                if (i == 0 || i == 1 || i == 8) dp[i] = 1;
+                else if (i == 2 || i == 5 || i == 6 || i == 9) {
+                    dp[i] = 2; ++res;
+                }
+            } else {
+                int a = dp[i / 10], b = dp[i % 10];
+                if (a == 1 && b == 1) dp[i] = 1;
+                else if (a >= 1 && b >= 1) {
+                    dp[i] = 2; ++res;
+                }
+            }
+        }
+        return res;
+    }
+};
+
