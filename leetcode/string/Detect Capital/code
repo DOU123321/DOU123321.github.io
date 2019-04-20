@@ -1,0 +1,33 @@
+//第一种
+class Solution {
+public:
+    bool detectCapitalUse(string word) {
+        if(word[0]>='a'&&word[0]<='z')
+        {
+            for(int i=1;i<word.length();i++)
+            {
+                if(word[i]>='A'&&word[i]<='Z')
+                    return false;
+            }
+            return true;
+        }
+        
+         if(word[1]>='a'&&word[1]<='z')
+        {
+            for(int i=2;i<word.length();i++)
+            {
+                if(word[i]>='A'&&word[i]<='Z')
+                    return false;
+            }
+             return true;
+        }
+        
+         for(int i=2;i<word.length();i++)
+            {
+                if(word[i]>='a'&&word[i]<='z')
+                    return false;
+            }
+                  
+        return true;
+    }
+};
