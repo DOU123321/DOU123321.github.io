@@ -1,0 +1,43 @@
+//代码
+class Solution {
+public:
+    bool checkRecord(string s) {
+        int cnt1=0,cnt2=0;     
+        for(int i=0;i<s.size();i++)
+        {
+            if(s[i]=='A') 
+            {
+                cnt1++;
+              if(cnt1>1)
+                return false;
+            }
+            if(s[i]=='L') 
+            {
+                cnt2++;
+                if(cnt2>2)
+                    return false;
+            }
+            else cnt2=0;
+        } 
+        return true;
+        
+    }
+};
+
+//用find
+class Solution {
+public:
+    bool checkRecord(string s) {
+            
+        if(s.find("LLL")<s.size())
+            return false;
+        int a=s.find('A');
+        if(a<s.size())
+        {
+            if(s.find('A',a+1)<s.size())
+                return false;
+        }
+        return true;
+        
+    }
+};
