@@ -1,0 +1,56 @@
+///代码
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        int len1=num1.size();
+        int len2=num2.size();
+        int len=min(len1,len2);
+        string s("");
+        int jin=0;
+        for(int i=0;i<len;i++)
+        {
+            int a=num1[len1-i-1]-'0'+num2[len2-i-1]-'0'+jin;
+            num1[len1-i-1]=a%10+'0';
+            jin=a/10;
+        }
+        if(len==len1)
+        {
+           for(int j=len2-len-1;j>=0;j--)
+            {
+                int a=num2[j]-'0'+jin;
+                num2[j]=a%10+'0';
+                jin=a/10;
+            }
+            if(jin==1)
+                s="1"+num2.substr(0,len2-len)+num1;
+            else
+                 s=num2.substr(0,len2-len)+num1;
+        }
+        else
+        {
+            for(int j=len1-len-1;j>=0;j--)
+            {
+                int a=num1[j]-'0'+jin;
+                num1[j]=a%10+'0';
+                jin=a/10;
+            }
+            if(jin==1)
+                s="1"+num1;
+            else
+                 s=num1;
+        }
+        return s;
+    }
+};
+
+//
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+    if (num1.size() < num2.size()) return addStrings(num2, num1);
+        int carry = 0, i = num1.size() - 1, j = num2.size() - 1;
+        for (; i >= 0 && (carry || j >= 0); i--, j--, carry /= 10) 
+            num1[i] = (carry += num1[i] - '0' + (j >= 0 ? num2[j] - '0' : 0)) % 10 + '0';
+        return (carry ? "1" : "") + num1;
+    }
+};
