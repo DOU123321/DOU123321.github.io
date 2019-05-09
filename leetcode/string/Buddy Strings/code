@@ -1,0 +1,26 @@
+
+//
+
+class Solution {
+public:
+    bool buddyStrings(string A, string B) {
+    if(A.size() != B.size())    return false;   //长度都不同，一定不成立
+
+    if(A == B)
+    {
+        set<char> dulpA (A.begin(),A.end());//检测A中是否有重复的元素
+        if(dulpA.size()<A.size())   return true;//说明A中有重复的字母
+    }
+
+    vector<int> difPos;
+    for(int i = 0;i<A.size();i++)
+    {
+        if(A[i]!=B[i])  difPos.push_back(i);    //记录两个字符串不同的位置
+    }
+
+    if(difPos.size()==2 && A[difPos[0]]==B[difPos[1]] && A[difPos[1]]==B[difPos[0]])    return true;
+
+    return false;
+}
+
+};
