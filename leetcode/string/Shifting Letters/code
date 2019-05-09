@@ -1,0 +1,16 @@
+
+用前缀和处理，一次性求出每个字母需要翻转的次数
+class Solution {
+public:
+    string shiftingLetters(string S, vector<int>& shifts) {
+        if (shifts.size() == 0 || S == "")return S;
+        for (int i = shifts.size() - 2; i >= 0; i--) {
+            shifts[i] = (shifts[i]%26+shifts[i + 1]%26)%26;
+        }
+        for (int i = 0; i < shifts.size(); i++) {
+            int c = S[i] - 'a' + shifts[i];
+            S[i] = 'a' + c % 26;
+        }
+        return S;
+    }
+};
